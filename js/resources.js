@@ -28,3 +28,4 @@ game.resources = [
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
 ];
+ 
