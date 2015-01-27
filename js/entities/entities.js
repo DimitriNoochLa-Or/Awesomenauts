@@ -12,6 +12,8 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(10, 20);
+		this.renderable.addAnimation("idle" , [78]);
+		this.rnederable.addAnimation("walk" , [117, 118 , 119 ,120 , 121 , 123 , 124 , 125] , 80);
 	},
 	update:function(delta){
 		if(me.input.isKeyPressed("right")){
