@@ -10,8 +10,18 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
-	},
-	update:function(){
 
+		this.body.setVelocity(10, 20);
+	},
+	update:function(delta){
+		if(me.input.isKeyPressed("right")){
+			//sets the position of my x by adding the velocity to find above in set velocitu and multipling ti by me.timer.tick
+			this.body.vel.x += this.body.accel.x * me.timer.tick//makes the movement look smooth
+		}
+		else{
+			this.body.vel.x = 0;
+		}
+		this.body.update(delta);//delta is the change in time
+		return true;
 	}
 });
