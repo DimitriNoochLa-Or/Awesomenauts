@@ -11,19 +11,32 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 
-		this.body.setVelocity(10, 20);
-		this.renderable.addAnimation("idle" , [78]);
-		this.rnederable.addAnimation("walk" , [117, 118 , 119 ,120 , 121 , 123 , 124 , 125] , 80);
+		this.body.setVelocity(6, 20);
+		this.renderable.addAnimation("idle" , [143]);
+		this.renderable.addAnimation("walk" , [143, 144 , 145 , 146 , 147 , 148 , 149 , 150 , 151] , 80);
+		this.renderable.setCurrentAnimation("idle");
 	},
 	update:function(delta){
 		if(me.input.isKeyPressed("right")){
 			//sets the position of my x by adding the velocity to find above in set velocitu and multipling ti by me.timer.tick
-			this.body.vel.x += this.body.accel.x * me.timer.tick//makes the movement look smooth
+			this.body.vel.x += this.body.accel.x * me.timer.tick//makes the movement look smooth()
+		
 		}
 		else{
 			this.body.vel.x = 0;
 		}
+		if(this.body.vel.x !== 0){
+		if(!this.renderable.isCurrentAnimation("walk")){
+			this.renderable.setCurrentAnimation("walk");
+
+			}
+		}
+		else{
+			this.renderable.setCurrentAnimation("idle");
+		}
 		this.body.update(delta);//delta is the change in time
+
+		this._super(me.Entity, "update", [delta]);
 		return true;
 	}
 });
