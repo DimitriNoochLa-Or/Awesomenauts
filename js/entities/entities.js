@@ -45,7 +45,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this._super(me.Entity, 'init' , [x , y, {
 			image : "tower",
 			width : 100,
-			hieght : 100,
+			height : 100,
 			spritewidth : "100",
 			spriteheight : "100",
 			getShape:function(){
@@ -56,6 +56,11 @@ game.PlayerBaseEntity = me.Entity.extend({
 			this.health = 10;
 			this.alwaysUpdate = true;
 			this.body.onCollision = this.onCollision.bind(this);
+			console.log("init");
+
+			this.renderable.addAnimation("idle" , [0]);
+			this.renderable.addAnimation("broken" , [1]);
+			this.renderable.setCurrentAnimation("idle");
 
 
 			this.type = "PlayerBaseEntity";
@@ -63,6 +68,8 @@ game.PlayerBaseEntity = me.Entity.extend({
 		update:function(delta){
 			if(this.health<=0){
 				this.broken = true;
+				this.renderable.setCurrentAnimation("broken");
+
 			}
 			this.body.update(delta);
 
@@ -82,7 +89,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this._super(me.Entity, 'init' , [x , y, {
 			image : "tower",
 			width : 100,
-			hieght : 100,
+			height : 100,
 			spritewidth : "100",
 			spriteheight : "100",
 			getShape:function(){
@@ -93,6 +100,11 @@ game.EnemyBaseEntity = me.Entity.extend({
 			this.health = 10;
 			this.alwaysUpdate = true;
 			this.body.onCollision = this.onCollision.bind(this);
+			console.log("init");
+
+			this.renderable.addAnimation("idle" , [0]);
+			this.renderable.addAnimation("broken" , [1]);
+			this.renderable.setCurrentAnimation("idle");
 
 
 			this.type = "EnemyBaseEntity";
@@ -100,6 +112,8 @@ game.EnemyBaseEntity = me.Entity.extend({
 		update:function(delta){
 			if(this.health<=0){
 				this.broken = true;
+				this.renderable.setCurrentAnimation("broken");
+
 			}
 			this.body.update(delta);
 
