@@ -36,7 +36,7 @@ game.PlayerEntity = me.Entity.extend({
 			this.body.vel.x = 0;
 		}
 		if (me.input.isKeyPressed("jump") &&  !this.jumping && !this.falling) {
-			this.jumping = true;
+			this.body.jumping = true;
 			this.body.vel.y -= this.body.accel.y * me.timer.tick;
 		}
 
@@ -52,6 +52,7 @@ game.PlayerEntity = me.Entity.extend({
 
 		if(me.input.isKeyPressed("attack")){
 			if(!this.renderable.isCurrentAnimation("attack")){
+				console.log(!this.renderable.isCurrentAnimation("attack"));
 			//sets the current animation to attack and once it is over 
 			// it goes back to idle
 			this.renderable.setCurrentAnimation("attack" , "idle"); 
@@ -66,20 +67,38 @@ game.PlayerEntity = me.Entity.extend({
 		}
 		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")){
 
-		if(!this.renderable.isCurrentAnimation("walk")){
-			this.renderable.setCurrentAnimation("walk");
-
-			};
-		}
-		else if(!this.renderable.isCurrentAnimation("attack"))
-		{
-			this.renderable.setCurrentAnimation("idle");     
-		}
-		this.body.update(delta);//delta is the change in time
+me.collision.check(this, true, this.collideHandler.bind(this), true);		this.body.update(delta);//delta is the change in time
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
-	}
+	},
+
+	collideHandler: function(response) {
+		if(response.b.type==='EnemyBaseEntity') {
+			var ydif = this.pos.y - response.b.pos.y;
+			var xdif = this.pos.x - response.b.pos.x;
+			
+			/*stops player from going through from above*/
+			if(ydif<-40 && xdif< 70 && xdif>-35) {
+				this.body.falling = false;
+				this.body.vel.y = -1;
+			/*stops player from going through from the right*/
+			}else if(xdif>-35 && this.facing==='right' && (xdif<0)) {
+				this.body.vel.x = 0;
+				this.pos.x = this.pos.x -1;
+			/*stops player from going through from the left*/
+			}else if(xdif<70 && this.facing==='left' && (xdif>0)) {
+				this.body.vel.x = 0;
+				this.pos.x = this.pos.x +1;
+
+			}
+		
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 900) {
+				console.log("tower Hit");
+				this.lastHit = this.now;
+				response.b.loseHealth();
+			}
+		}
 });
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x , y ,settings){
