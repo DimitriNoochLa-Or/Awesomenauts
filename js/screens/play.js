@@ -16,9 +16,17 @@ game.PlayScreen = me.ScreenObject.extend({
 		/*adds player to the game*/
 		me.game.world.addChild(player, 5);
 
-		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
+		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
 		/*adds the gamemanager to the game*/
-		me.game.world.addChild(gamemanager, 0);
+		me.game.world.addChild(gameTimerManager, 0);
+
+		var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
+		/*adds the HeroDeathManager to the game*/
+		me.game.world.addChild(heroDeathManager, 0);
+
+		var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
+		/*adds the HeroDeathManager to the game*/
+		me.game.world.addChild(experienceManager, 0);
 
 		/*binds the right key so when pressed the player moves right*/
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
@@ -33,7 +41,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
 		/*plays the song in the background when the game starts*/
-		me.audio.playTrack("inspector norse");
+		me.audio.playTrack("Ozzy");
 	},
 
 

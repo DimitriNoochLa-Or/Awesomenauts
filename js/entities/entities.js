@@ -13,7 +13,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	setSuper: function(x, y){
 		/*reaches to the constructor of Entity*/
-		this._super(me.Entity, 'init', [x, y {
+		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the player and sets its size*/
 			image: "player",
 			width: 64,
@@ -64,12 +64,12 @@ game.PlayerEntity = me.Entity.extend({
 		this.now = new Date().getTime();
 		//if im dead returns true
 		//if im not returns false
-		this.dead = checkIfDead();
+		this.dead = this.checkIfDead();
 
 		this.checkKeyPressesandMove();
 		//refactors code so that it is easier to navigate
 
-		this.setAnimation = ();
+		this.setAnimation();
 		
 
 		
@@ -222,10 +222,10 @@ game.PlayerEntity = me.Entity.extend({
 					this.body.vel.x = 0;
 				}
 			}	
-		},
+	},
 
 
-		checkAttacking: function(xdif, ydif, response){
+	checkAttacking: function(xdif, ydif){
 			/*sets the amount of hits it needs for the creep to die*/
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
 					&& (Math.abs(ydif) <=40) && 
@@ -237,21 +237,16 @@ game.PlayerEntity = me.Entity.extend({
 		}
 		return false;
 	},
-	 hitCreep: function(response){
+	hitCreep: function(response){
 	 		//if the creeps help is less then our attack,exectue code in if statement
 			if(response.b.health <= game.data.playerAttack){
 				//adds one gold for a creep kill
 				game.data.gold += 1;
-				console.log("Current gold: " + game.data.gold)
+				console.log("Current gold: " + game.data.gold);
 
 			}
 				/*takes away one health when creep is hit*/
 				response.b.loseHealth(game.data.playerAttack);
-			}
-	 }
+			
+	},
 });
-
-
-
-
-
