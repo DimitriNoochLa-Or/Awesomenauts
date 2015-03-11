@@ -7,8 +7,10 @@ game.PlayerEntity = me.Entity.extend({
 		this.setFlags();//used for like left or right
 		/*the camera follows the player*/
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-		this.setAnimation();
+		this.addAnimation();
 
+
+		this.renderable.setCurrentAnimation("idle");
 	},
 
 	setSuper: function(x, y){
@@ -45,17 +47,15 @@ game.PlayerEntity = me.Entity.extend({
 	 	/*keeps track of which direction your character is going*/
 		this.facing = "right";
 		this.dead = false;
-		this,attacking = false;
+		this.attacking = false;
 	 },
 
-    setAnimation: function(){
-
+    addAnimation: function(){
 		/*adds the pictures of the character*/
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
 		this.renderable.addAnimation("attack", [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234], 80);
 
-		this.renderable.setCurrentAnimation("idle");
 
 	 },
 

@@ -29,12 +29,12 @@ game.TitleScreen = me.ScreenObject.extend({
 			},
 
 			newGame: function(){
+				me.input.releasePointerEvent('pointerdown');
 				me.save.remove('exp');
 				me.save.remove('exp1');
 				me.save.remove('exp2');
 				me.save.remove('exp3');
-				me.save.remove('exp4');
-				me.input.releasePointerEvent('pointerdown' , this);
+				me.save.remove('exp4');				
 				me.state.change(me.state.PLAY);
 
 
@@ -64,8 +64,12 @@ game.TitleScreen = me.ScreenObject.extend({
 
 			newGame: function(){
 				me.input.releasePointerEvent('pointerdown' , this);
-				
-				me.state.change(me.state.PLAY);
+				me.save.remove('exp');
+				me.save.remove('exp1');
+				me.save.remove('exp2');
+				me.save.remove('exp3');
+				me.save.remove('exp4');	
+				me.state.change(me.state.SPENDEXP);
 
 
 			}
@@ -79,7 +83,6 @@ game.TitleScreen = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-		me.input.unbindKey(me.input.KEY.ENTER); // TODO
-		me.event.unsubscribe(this.handler);
+	
 	}
 });

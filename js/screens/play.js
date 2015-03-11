@@ -11,11 +11,6 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		this.resetPlayer(0, 420);
 
-		/*adds the player by pulling from pool*/
-		var player = me.pool.pull("player", 0, 420, {});
-		/*adds player to the game*/
-		me.game.world.addChild(player, 5);
-
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
 		/*adds the gamemanager to the game*/
 		me.game.world.addChild(gameTimerManager, 0);
