@@ -29,13 +29,8 @@ game.TitleScreen = me.ScreenObject.extend({
 			},
 
 			newGame: function(){
-				me.input.releasePointerEvent('pointerdown');
-				me.save.remove('exp');
-				me.save.remove('exp1');
-				me.save.remove('exp2');
-				me.save.remove('exp3');
-				me.save.remove('exp4');				
-				me.state.change(me.state.PLAY);
+				me.input.releasePointerEvent('pointerdown');			
+				me.state.change(me.state.NEW);
 
 
 			}
@@ -55,7 +50,6 @@ game.TitleScreen = me.ScreenObject.extend({
 			//its passing what out renderable is
 			draw: function(renderer){
 				this.font.draw(renderer.getContext(), "Continue" , this.pos.x, this.pos.y);//coordinates
-				this.font.draw(renderer.getContext(), "tralalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalala", 250, 530);
 			},
 
 			update: function(dt){
@@ -63,13 +57,10 @@ game.TitleScreen = me.ScreenObject.extend({
 			},
 
 			newGame: function(){
+
+
 				me.input.releasePointerEvent('pointerdown' , this);
-				me.save.remove('exp');
-				me.save.remove('exp1');
-				me.save.remove('exp2');
-				me.save.remove('exp3');
-				me.save.remove('exp4');	
-				me.state.change(me.state.SPENDEXP);
+				me.state.change(me.state.LOAD);
 
 
 			}

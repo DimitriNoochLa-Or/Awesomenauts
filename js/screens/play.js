@@ -23,6 +23,14 @@ game.PlayScreen = me.ScreenObject.extend({
 		/*adds the HeroDeathManager to the game*/
 		me.game.world.addChild(experienceManager, 0);
 
+		var spendGold = me.pool.pull("SpendGold", 0, 0, {});
+		me.game.world.addChild(spendGold, 0);
+
+		
+		me.input.bindKey(me.input.KEY.B, "buy");
+		me.input.bindKey(me.input.KEY.Q, "skill1");
+		me.input.bindKey(me.input.KEY.W, "skill2");	
+		me.input.bindKey(me.input.KEY.E, "skill3");		
 		/*binds the right key so when pressed the player moves right*/
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
 		/*binds the left key so when pressed the player moves left*/
@@ -36,7 +44,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
 		/*plays the song in the background when the game starts*/
-		me.audio.playTrack("Ozzy");
+		me.audio.playTrack("retarded batman");
 	},
 
 

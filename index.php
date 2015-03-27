@@ -25,17 +25,23 @@
 		<!-- Game Scripts -->
 		<script type="text/javascript" src="js/game.js"></script>
 		<script type="text/javascript" src="js/resources.js"></script>
-
+		<!-- entities -->
 		<script type="text/javascript" src="js/entities/entities.js"></script>
 		<script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
 		<script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script>
 		<script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
-		<script type="text/javascript" src="js/entities/GameManager.js"></script>
+		<!-- gamemanagers -->
+		<script type="text/javascript" src="js/entities/gamemanagers/GameManager.js"></script>
+		<script type="text/javascript" src="js/entities/gamemanagers/GameTimerManager.js"></script>
+		<script type="text/javascript" src="js/entities/gamemanagers/HeroDeathManager.js"></script>
+		<script type="text/javascript" src="js/entities/gamemanagers/SpendGold.js"></script>
 		<script type="text/javascript" src="js/entities/HUD.js"></script>
-
+		<!-- screens  -->
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
 		<script type="text/javascript" src="js/screens/spendExp.js"></script>
+		<script type="text/javascript" src="js/screens/newProfile.js"></script>
+		<script type="text/javascript" src="js/screens/LoadProfile.js"></script>
 
 		<!-- /build -->
 		<!-- Bootstrap & Mobile optimization tricks -->

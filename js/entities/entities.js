@@ -250,3 +250,75 @@ game.PlayerEntity = me.Entity.extend({
 			
 	},
 });
+//allycreep
+game.MyCreep = me.Entity.extend({
+	init: function(x, y, settings){
+		this._super(me.Entity, 'init', [x, y, {
+			image: "creep2",
+			width: 100,
+			height:85,
+			spritewidth: "100",
+			spriteheight: "85",
+			getShape: function(){
+				return (new me.Rect(0, 0, 52, 100)).toPolygon();	
+			}
+		}]);
+		
+		 this.health = game.data.allyCreepHealth;
+		 this.alwaysUpdate = true;
+		// //this.attacking lets us know if the enemy is currently attacking
+		 this.attacking = false;
+		// //keeps track of when our creep last attacked anyting
+		 this.lastAttacking = new Date().getTime();
+		 this.lastHit = new Date().getTime();
+		 this.now = new Date().getTime();
+
+		this.body.setVelocity(game.data.allyCreepMoveSpeed, 20);
+
+		this.type = "MyCreep";
+
+		this.renderable.addAnimation("walk", [0, 1, 2, 3, 4], 80);
+		this.renderable.setCurrentAnimation("walk");
+	},
+
+	update: function(delta) {
+		// this.now = new Date().getTime();
+		this.body.vel.x += this.body.accel.x * me.timer.tick;
+		this.flipX(true);
+		
+		me.collision.check(this, true, this.collideHandler.bind(this), true);
+
+		this.body.update(delta);
+
+		this._super(me.Entity, "update", [delta]);
+		return true;
+
+		},
+	
+
+	collideHandler: function(response)	{
+		if(response.b.type==='EnemyBaseEntity'){
+			this.attacking = true;
+			//this.lastAttacking = this.now;
+			this.body.vel.x = 0;
+			this.pos.x = this.pos.x +1;
+			//checks that it has been at least 1 second since this creep hit a base
+			if((this.now-this.lastHit <= game.data.allyCreepAttackTimer)){
+				//updates the last hit timer
+				this.lastHit = this.now;
+				//makes the player base call its loseHealth	function and passes it a damage of 1
+				response.b.loseHealth(1);
+			}
+		}
+	},
+	collidewithEnemyCreep: function(response){
+		var xdif = this.pos.x - response.b.pos.x;
+			var ydif = this.pos.y - response.b.pos.y;
+
+			this.stopMovement(xdif);
+
+			if(this.checkAttacking(xdif, ydif)){
+				this.hitCreep(response);
+			}
+	}
+});

@@ -5,27 +5,39 @@ var game = {
 	// an object where to store game information
 	data : {
 		// score
-		score : 0,
+	    score : 0,
+		allyCreepHealth: 10,
+		allyCreepMoveSpeed: 3,
+		allyCreepAttackTimer: 1000,
 		enemyBaseHealth: 10,
 		playerBaseHealth: 10,
-		playerHealth: 10,
+		enemyCreepHealth: 1,
+		playerHealth: 100,
 		enemyCreepAttack: 1,
-		playerAttack: 1,
+		playerAttack: 1000,
 		playerAttackTimer: 1000,
 		enemyCreepAttackTimer: 1000,
-		playerMoveSpeed: 5,
-		enemyCreepHealth: 1,
-		creepMoveSpeed: 5,
-		gameTimerManager: "",
-		heroDeathManager: "",
+		playerMoveSpeed: 200,
+		creepMoveSpeed: 10,
+		GameTimerManager: "",
+		HeroDeathManager: "",
 		player: "",
+		exp: 100000,
 		gold: 0,
-		exp: 0,
 		exp1: 0,
 		exp2: 0,
-		exp3: 0,
-		exp4: 0,
-		win: ""
+		exp3: 0, 
+		exp4:0,
+		ability1: 0,
+		ability2: 0,
+		ability3: 0,
+		skill1: 0,
+		skill2: 0,
+		skill3: 0,
+		win: "",
+		pausePos: "",
+		buyscreen: "",
+		buytext: ""
 
 	},
 	
@@ -49,6 +61,8 @@ var game = {
  	me.save.add({exp : 0 ,exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
  	me.state.SPENDEXP = 112;
+ 	me.state.LOAD = 113;
+ 	me.state.NEW = 114;
 
  	console.log(game.data.exp);
  	console.log(game.data.exp2);
@@ -74,17 +88,22 @@ var game = {
 		/*registers both the player base and enemy base*/
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
+		me.pool.register("MyCreep", game.MyCreep, true);	
+
 		/*registers the creep*/
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
 		/*registers the GameManager*/
 		me.pool.register("GameTimerManager", game.GameTimerManager);
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 		me.pool.register("ExperienceManager", game.ExperienceManager);
+		me.pool.register("SpendGold", game.SpendGold);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
-		me.state.set(me.state.SPENDEXP, new game.SpendExpScreen());
+		me.state.set(me.state.SPENDEXP, new game.SpendExp());
+		me.state.set(me.state.LOAD, new game.LoadProfile());
+		me.state.set(me.state.NEW, new game.NewProfile());
 
 
 		// Start the game.
