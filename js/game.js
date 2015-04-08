@@ -6,6 +6,8 @@ var game = {
 	data : {
 		// score
 	    score : 0,
+	    option1: "",
+	    option2: "",
 		allyCreepHealth: 10,
 		allyCreepMoveSpeed: 3,
 		allyCreepAttackTimer: 1000,
@@ -22,7 +24,8 @@ var game = {
 		GameTimerManager: "",
 		HeroDeathManager: "",
 		player: "",
-		exp: 100000,
+		arrowTimer: 1,
+		exp: 0,
 		gold: 0,
 		exp1: 0,
 		exp2: 0,
@@ -37,7 +40,9 @@ var game = {
 		win: "",
 		pausePos: "",
 		buyscreen: "",
-		buytext: ""
+		buytext: "",
+		minimap: "",
+		miniPlayer: "",
 
 	},
 	
@@ -57,8 +62,7 @@ var game = {
 		});
 	}
  	
-	// this
- 	me.save.add({exp : 0 ,exp1: 0, exp2: 0, exp3: 0, exp4: 0});
+	
 
  	me.state.SPENDEXP = 112;
  	me.state.LOAD = 113;
@@ -97,6 +101,9 @@ var game = {
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		me.pool.register("SpendGold", game.SpendGold);
+		me.pool.register("arrow", game.ShootArrow , true);
+		me.pool.register("minimap", game.minimap, true);
+		me.pool.register("Miniplayer", game.MiniPlayerLocation, true);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());

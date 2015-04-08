@@ -39,7 +39,6 @@ game.EnemyCreep = me.Entity.extend({
 
 	/*makes the creep move*/
 	update: function(delta) {
-		console.log(this.health);
 		if(this.health <= 0) {
 			me.game.world.removeChild(this);
 		}
@@ -54,10 +53,10 @@ game.EnemyCreep = me.Entity.extend({
 	
 
 		/*makes the creeps jump*/
-		/*if(!this.body.jumping && !this.body.falling) {
-			this.body.jumping = true;
-			this.body.vel.y -= this.body.accel.y * me.timer.tick;
-		}*/
+		// if(!this.body.jumping && !this.body.falling) {
+		// 	this.body.jumping = true;
+		// 	this.body.vel.y -= this.body.accel.y * me.timer.tick;
+		// }
 
 
 

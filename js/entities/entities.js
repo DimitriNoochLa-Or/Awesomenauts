@@ -32,6 +32,7 @@ game.PlayerEntity = me.Entity.extend({
 	setPlayerTimers: function(){
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
+		this.lastArrow = this.now;
 		this.lastAttack = new Date().getTime(); /*haven't used this*/
 
 	},
@@ -65,7 +66,7 @@ game.PlayerEntity = me.Entity.extend({
 		//if im dead returns true
 		//if im not returns false
 		this.dead = this.checkIfDead();
-
+		this.checkAbilityKeys();
 		this.checkKeyPressesandMove();
 		//refactors code so that it is easier to navigate
 
@@ -134,6 +135,26 @@ game.PlayerEntity = me.Entity.extend({
 		/*plays the sound effect*/
 		me.audio.play("jump");
 	},
+
+	checkAbilityKeys: function(){
+		if(me.input.isKeyPressed("skill1")){
+			//this.speedBurst();
+		}else if(me.input.isKeyPressed("skill2")){
+			//this.cannibal();
+		}else if(me.input.isKeyPressed("skill3")){
+			this.shootArrow();
+		}
+	},
+
+	shootArrow: function(){
+		if((this.now-this.lastArrow) >= game.data.arrowTimer && game.data.ability3 > 0){
+		this.lastArrow = this.now;
+		var arrow = me.pool.pull("arrow", this.pos.x, this.pos.y, 0, {}, this.facing);
+		me.game.world.addChild(arrow, 10);
+	   }
+	},
+
+
 
 	setAnimation: function(){
 		if(this.attacking) {
@@ -229,7 +250,7 @@ game.PlayerEntity = me.Entity.extend({
 			/*sets the amount of hits it needs for the creep to die*/
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
 					&& (Math.abs(ydif) <=40) && 
-					(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
+					(((xdif>0) && this.facing==="right") || ((xdif<0) && this.facing==="left"))
 					){
 				this.lastHit = this.now;
 			return true;

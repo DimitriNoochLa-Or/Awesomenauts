@@ -14,8 +14,11 @@ game.resources = [
       {name: "exp-screen", type:"image", src: "data/img/heman.gif"},
       {name: "background", type:"image", src: "data/img/retarded batman.png"},
       {name: "gold-screen", type:"image", src: "data/img/spend.png"}, //loads the player
-      {name: "load-screen", type:"image", src: "data/img/loadpic.png"},
-      {name: "new-screen", type:"image", src: "data/img/newpic.png"},
+      {name: "load-screen", type:"image", src: "data/img/heman.gif"},
+      {name: "new-screen", type:"image", src: "data/img/newpic.jpg"},
+      {name: "arrow", type:"image", src: "data/img/iArrow.png"},
+      {name: "minimap3", type:"image", src: "data/img/miniMap3.png"},
+
 
 
 
@@ -39,6 +42,8 @@ game.resources = [
 	 */	
 	 {name: "retarded batman", type: "audio", src: "data/bgm/"},
 	 {name: "heyhey", type: "audio", src: "data/bgm/"},
+	 {name: "NumaNuma", type: "audio", src: "data/bgm/"},
+
 
 	/* Sound effects. 
 	 * @example
