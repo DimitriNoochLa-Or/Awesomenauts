@@ -19,8 +19,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			//draws the main function
 			//its passing what out renderable is
 			draw: function(renderer){
-				this.font.draw(renderer.getContext(), "START a new game" , this.pos.x, this.pos.y);//coordinates
-				this.font.draw(renderer.getContext(), "tralalalala", 250, 530);
+				this.font.draw(renderer.getContext(), "Start a new game" , this.pos.x, this.pos.y);//coordinates
 			},
 
 			update: function(dt){
@@ -38,7 +37,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			}
 		}));
 
-		me.game.world.addChild= (game.data.option1);
+		me.game.world.addChild(game.data.option1, 5);
 
 			game.data.option2 = new (me.Renderable.extend({
 			init: function(){
@@ -71,7 +70,7 @@ game.TitleScreen = me.ScreenObject.extend({
 
 			}
 			}));
-			me.game.world.addChild = (game.data.option2);
+			me.game.world.addChild(game.data.option2, 5);
 	
 	},
 	

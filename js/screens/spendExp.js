@@ -45,6 +45,7 @@ game.SpendExp = me.ScreenObject.extend({
 			}else if(action === "F4"){
 
 			}else if(action === "F5"){
+				console.log("asd");
 				me.state.change(me.state.PLAY);
 			}
 		});

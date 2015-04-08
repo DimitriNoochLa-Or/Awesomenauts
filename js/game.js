@@ -19,7 +19,7 @@ var game = {
 		playerAttack: 1000,
 		playerAttackTimer: 1000,
 		enemyCreepAttackTimer: 1000,
-		playerMoveSpeed: 200,
+		playerMoveSpeed: 10,
 		creepMoveSpeed: 10,
 		GameTimerManager: "",
 		HeroDeathManager: "",
@@ -103,7 +103,7 @@ var game = {
 		me.pool.register("SpendGold", game.SpendGold);
 		me.pool.register("arrow", game.ShootArrow , true);
 		me.pool.register("minimap", game.minimap, true);
-		me.pool.register("Miniplayer", game.MiniPlayerLocation, true);
+		me.pool.register("miniPlayer", game.MiniPlayerLocation, true);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
